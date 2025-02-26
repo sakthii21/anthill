@@ -11,10 +11,14 @@ const bookRoutes = require('./Routes/bookingRoutes')
 const connectDb = require("./config/db")
 const cors = require("cors")
 
+const swaggerDocs = require("./config/swagger");
+
+
 const PORT = process.env.PORT || 3000
 connectDb()
 app.use(express.json())
 app.use(cors())
+swaggerDocs(app);
 
 app.use(express.static("public"))
 // app.get("/",(req, res) =>{

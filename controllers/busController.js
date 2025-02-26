@@ -45,6 +45,7 @@ const getBuses = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+  
   const getBusById = async (req, res) => {
     try {
         const { busId } = req.params;
@@ -61,33 +62,43 @@ const getBuses = async (req, res) => {
 };
 
   
-  const updateBus = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { route } = req.body;
-  
-      // Check if the bus exists
-      let bus = await Bus.findById(id);
-      if (!bus) {
-        return res.status(404).json({ error: "Bus not found" });
-      }
-  
-      // If updating route, verify if it exists
-      if (route) {
-        const routeExists = await Route.findById(route);
-        if (!routeExists) {
-          return res.status(404).json({ error: "Route not found" });
-        }
-      }
-  
-      // Update the bus
-      const updatedBus = await Bus.findByIdAndUpdate(id, req.body, { new: true });
-      res.status(200).json({ message: "Bus updated successfully", bus: updatedBus });
-  
-    } catch (err) {
-      res.status(500).json({ error: err.message });
+const updateBus = async (req, res) => {
+  try {
+    const { busId } = req.params;  // Change `id` to `busId`
+    const { route, ...updateData } = req.body;
+
+    console.log("Received Bus ID:", busId);
+    console.log("Update Data:", updateData);
+
+    // Check if the bus exists
+    let bus = await Bus.findById(busId);
+    if (!bus) {
+      return res.status(404).json({ error: "Bus not found" });
     }
-  };
+
+    // If updating route, verify if it exists
+    if (route) {
+      const routeExists = await Route.findById(route);
+      if (!routeExists) {
+        return res.status(404).json({ error: "Route not found" });
+      }
+      updateData.route = route;
+    }
+
+    // Update the bus
+    const updatedBus = await Bus.findByIdAndUpdate(busId, { $set: updateData }, { new: true });
+
+    if (!updatedBus) {
+      return res.status(500).json({ error: "Failed to update bus" });
+    }
+
+    res.status(200).json({ message: "Bus updated successfully", bus: updatedBus });
+  } catch (err) {
+    console.error("Update Bus Error:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
   
   // Delete Bus (Only Admins)
   const deleteBus = async (req, res) => {
