@@ -1,0 +1,71 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff5e6; /* Light Peach Background */
+}
+
+.login-container {
+  width: 350px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  text-align: center;
+  color: #8e44ad; /* Purple */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #5d3b8a; /* Darker Purple */
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #d3bce6; /* Soft Purple Border */
+  border-radius: 6px;
+  background-color: #faf0ff; /* Lightest Purple */
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #9b59b6; /* Purple Button */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #8e44ad; /* Darker Purple on Hover */
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgot-password a {
+  color: #9b59b6; /* Purple Link */
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
